@@ -1,6 +1,6 @@
 node {
     // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
-    def server = Artifactory.server "SERVER_ID"
+    def server = Artifactory.server "artifactory-cloud-server"
     // Create an Artifactory Maven instance.
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
@@ -11,7 +11,7 @@ node {
 
     stage('Artifactory configuration') {
         // Tool name from Jenkins configuration
-        rtMaven.tool = "Maven-3.3.9"
+        rtMaven.tool = "Maven"
         // Set Artifactory repositories for dependencies resolution and artifacts deployment.
         rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
         rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
